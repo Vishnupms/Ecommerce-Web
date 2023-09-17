@@ -35,15 +35,14 @@ import {
   import Category from "../components/Category";
   import "../index.css";
   
-  const Navbar = () => {
+  const Navbar = ({onSelectCategory}) => {
     const [navbar, setNavbar] = useState(false);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [placement, setPlacement] = useState("left");
+    
   
     const cartData = []
     const changeNavbarBg = () => {
-      console.log(window.scrollY);
-      console.log("Nav", navbar);
       if (window.scrollY >= 30) {
         setNavbar(true);
       } else {
@@ -148,7 +147,7 @@ import {
             w={{ base: "92%", md: "75.5%" }}
             m="auto"
           >
-            <Category />
+            <Category onSelectCategory={onSelectCategory} />
           </Box>
         ) : (
           <Box
@@ -156,7 +155,7 @@ import {
             w={{ base: "92%", md: "75.5%" }}
             m="auto"
           >
-            <Category />
+            <Category onSelectCategory={onSelectCategory} />
           </Box>
         )}
   
@@ -188,7 +187,7 @@ import {
                     </Flex>
                   </DrawerHeader>
                   <DrawerBody>
-                    <Category />
+                    <Category onSelectCategory={onSelectCategory} />
                   </DrawerBody>
                 </DrawerContent>
               </Drawer>

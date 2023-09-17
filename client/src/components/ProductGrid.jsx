@@ -16,32 +16,41 @@ const dummyData = [
       price: 19.99,
       rating: 4.5,
       discount: '2%',
+      url: "fruits",
       src:'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg',
-      brand:'Colgate'
+      brand:'Colgate',
+      category: "fruits",
     },
     {
       id: 2,
       product_info: "Product B",
       price: 24.99,
+      src:'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
       rating: 4.0,
+      category:"grains"
     },
     {
       id: 3,
       product_info: "Product C",
+      src:'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg',
       price: 14.99,
+      category: "fruits",
       rating: 4.8,
     },
     {
       id: 4,
       product_info: "Product D",
+      src:'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
       price: 29.99,
+      category: "grains",
       rating: 4.2,
     },
     // Add more dummy data as needed
   ];
 
-const ProductGrid = () => {
+const ProductGrid = ({selectedCategory}) => {
   const [selectVal, setSelectVal] = useState("desc");
+  console.log(selectedCategory,"cscs")
 //   const products = useSelector((store) => store.ProductReducer.products);
   const loading = false
 //   const loading = useSelector((store) => store.ProductReducer.isLoading);
@@ -51,6 +60,9 @@ const ProductGrid = () => {
   const onChangeHandle = (e) => {
     setSelectVal(e.target.value);
   };
+  const filteredItems = selectedCategory
+  ? dummyData.filter((item) => item.category === selectedCategory)
+  : dummyData;
 
   return (
     <>
@@ -102,7 +114,7 @@ const ProductGrid = () => {
               color="#58595b"
               letterSpacing={1}
             >
-              All Products
+              {selectedCategory?selectedCategory:" All Products"}
             </Text>
           </Flex>
           <Box borderBottom="1px solid #999" mt="-1rem" mb="1.5rem">
@@ -116,7 +128,7 @@ const ProductGrid = () => {
             }}
             rowGap="2rem"
           >
-            {dummyData
+            {filteredItems
               .sort((a, b) => {
                 if (selectVal === "asc") {
                   console.log("selected value", selectVal);
@@ -135,7 +147,11 @@ const ProductGrid = () => {
                 }
               })
               .map((item, id) => {
-                return <ProductCard id={id} item={item} key={id} />;
+                return (
+                  <Box key={id} mb="2rem" ml="1rem"> {/* Add margin here */}
+                    <ProductCard id={id} item={item} />
+                  </Box>
+                );
               })}
           </Grid>
         </Box>

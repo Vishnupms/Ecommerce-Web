@@ -23,17 +23,26 @@ import {
   
   
     return (
+      <Stack spacing="20px"> 
       <Box
         border="1px solid #f2f2f2"
+        borderRadius="8px" 
+        overflow="hidden"
+        boxShadow="0 4px 6px rgba(0, 0, 0, 0.1)" 
+        transition="transform 0.2s, box-shadow 0.2s" 
+        width="100%"
+        maxWidth="300px"
         h="auto"
         p="5px"
         key={id}
-        _hover={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
+        _hover={{ 
+          transform: "translateY(-4px)",
+          boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
       >
         {/* get offer */}
         <Link to={`/singleproduct`}>
           <Box >
-            <Flex
+            {/* <Flex
               p={{ base: "5px", md: "5px 10px" }}
               align="center"
               boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
@@ -52,15 +61,10 @@ import {
               <Box pl="5px">
                 <GiSevenPointedStar color="#ba5253" fontSize="10px" />
               </Box>
-            </Flex>
+            </Flex> */}
             {/* product Image */}
             <Grid justifyItems={"center"} pt=".5rem" pb="1rem">
-              <Image
-                src={item?.src}
-                alt={"Image not availble"}
-                w="150px"
-                h="150px"
-              />
+            <Image src={item?.src} alt="Image not available" w="95%" h="auto" borderRadius="8px" border={"1px"} borderColor={"gray.300"} />
             </Grid>
             {/* product details section  */}
             <Box px="5px">
@@ -210,11 +214,12 @@ import {
                 });
               }}
             >
-              Add To cart
+              Add 
             </Button>
           </Stack>
         </Box>
       </Box>
+      </Stack>
     );
   };
   
